@@ -1,10 +1,9 @@
-// tests/app.test.js
 const request = require('supertest');
 const { app, server } = require('../index');
 
-describe('GET /hello', () => {
+describe('GET /', () => {
   it('responds with Hello World!', async () => {
-    const res = await request(app).get('/hello');
+    const res = await request(app).get('/');
     expect(res.statusCode).toEqual(200);
     expect(res.text).toEqual('Hello World!');
   });
