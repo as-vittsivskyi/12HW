@@ -1,6 +1,6 @@
 // tests/app.test.js
 const request = require('supertest');
-const app = require('../index');
+const { app, server } = require('../index');
 
 describe('GET /', () => {
   it('responds with Hello World!', async () => {
@@ -11,6 +11,6 @@ describe('GET /', () => {
   
   afterAll(async () => {
     // Закриваємо сервер після завершення всіх тестів
-    await app.close();
+    await server.close();
   });
 });
