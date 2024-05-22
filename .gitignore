@@ -1,0 +1,14 @@
+# Ignore node_modules directory
+node_modules/
+
+# Ignore .env файл
+.env
+
+# Ignore будь-які файли, що згенеровані IDE або текстовими редакторами
+*.iml
+*.log
+*.DS_Store
+
+# Ігноруйте файли, які можуть бути створені npm або yarn
+package-lock.json
+yarn.lock
