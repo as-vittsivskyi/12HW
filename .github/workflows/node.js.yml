@@ -1,4 +1,4 @@
-name: CI for Node.js Project
+name: Continuous Integration
 
 on:
   push:
@@ -7,21 +7,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18, 20]
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
     - name: Set up Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '20' 
 
     - name: Install dependencies
       run: npm install
@@ -31,23 +27,3 @@ jobs:
 
     - name: Run unit tests
       run: npm test
-
-    - name: Update code in repository
-      run: |
-        git config --global user.name "github-actions"
-        git config --global user.email "github-actions@github.com"
-        echo "// Save a file to verify the script execution" >> update.txt
-        git add update.txt
-        git commit -m "CI: Verify script execution"
-        git push
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Verify script execution
-      run: |
-        if [ -f update.txt ]; then
-          echo "Script executed successfully."
-        else
-          echo "Script execution failed."
-          exit 1
-        fi
